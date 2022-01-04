@@ -1,8 +1,37 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import React, { useState } from 'react';
+import { IonButton, IonContent, IonHeader, IonModal, IonPage, IonTitle, IonToolbar, IonFooter, useIonModal } from '@ionic/react';
 import './Home.css';
 
+const ModalContent: React.FC<{
+  onDismiss: () => void;
+}> = ({ onDismiss }) => (
+  <React.Fragment>
+    <IonHeader>
+      <IonToolbar>
+        <IonTitle>Header</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent>
+      <IonButton onClick={onDismiss}>Close Modal</IonButton>
+    </IonContent>
+    <IonFooter>
+      <IonToolbar>
+        <IonTitle>Footer</IonTitle>
+      </IonToolbar>
+    </IonFooter>
+  </React.Fragment>
+);
+
 const Home: React.FC = () => {
+  const handleDismiss = () => {
+    dismissModalHook();
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const [showModalHook, dismissModalHook] = useIonModal(ModalContent, {
+    onDismiss: handleDismiss
+  });
+
   return (
     <IonPage>
       <IonHeader>
@@ -16,7 +45,28 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
+
+        <IonButton onClick={() => showModalHook()}>Show Modal w/Hook</IonButton>
+        
+        <IonButton onClick={() => setShowModal(true)}>Show Modal w/IonModal Component</IonButton>
+
+        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+          <IonPage>
+            <IonHeader>
+              <IonToolbar>
+                <IonTitle>Header</IonTitle>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent>
+              <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+            </IonContent>
+            <IonFooter>
+              <IonToolbar>
+                <IonTitle>Footer</IonTitle>
+              </IonToolbar>
+            </IonFooter>
+          </IonPage>
+        </IonModal>
       </IonContent>
     </IonPage>
   );
