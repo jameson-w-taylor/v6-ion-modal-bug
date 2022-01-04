@@ -51,21 +51,19 @@ const Home: React.FC = () => {
         <IonButton onClick={() => setShowModal(true)}>Show Modal w/IonModal Component</IonButton>
 
         <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-          <IonPage>
-            <IonHeader>
-              <IonToolbar>
-                <IonTitle>Header</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent>
-              <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
-            </IonContent>
-            <IonFooter>
-              <IonToolbar>
-                <IonTitle>Footer</IonTitle>
-              </IonToolbar>
-            </IonFooter>
-          </IonPage>
+          <IonHeader>
+            <IonToolbar>
+              <IonTitle>Header</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent>
+            <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+          </IonContent>
+          <IonFooter>
+            <IonToolbar>
+              <IonTitle>Footer</IonTitle>
+            </IonToolbar>
+          </IonFooter>
         </IonModal>
       </IonContent>
     </IonPage>
